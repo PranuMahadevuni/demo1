@@ -1,14 +1,28 @@
 name: hello-world
 on: push
 jobs:
-  my-job:
-    runs-on: ubuntu-latest
-    steps:
-      - name: my-step
-        run: echo "Hello World!"
+my-job:
+  runs-on: ubuntu-latest
+  steps:
+    - name: my-step
+      run: echo "Hello World!"
 my-job2:
   runs-on: ubuntu-latest
   steps:
     - name: my-step
       run: echo "Hello World456!"
 
+my-job3:
+  hardcoded-secrets-demo:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Display Secrets
+        env:
+          API_TOKEN: "abc123xyz456"
+          DATABASE_PASSWORD: "secretp@ssw0rd"
+          SSH_PRIVATE_KEY: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDX..."
+        run: |
+          echo "API Token: $API_TOKEN"
+          echo "Database Password: $DATABASE_PASSWORD"
+          echo "SSH Private Key: $SSH_PRIVATE_KEY"
