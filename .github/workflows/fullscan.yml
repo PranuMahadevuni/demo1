@@ -1,4 +1,4 @@
-name: Hardcoded Secrets Demo
+name: Hardcoded Secrets Detection
 
 on:
   push:
@@ -6,66 +6,44 @@ on:
       - main
 
 jobs:
-  hardcoded-secrets-demo:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Test
-        env:
-          API_TOKEN: 94XHrfNRwXsjqTqApRrwWmhDLDHpIYV8
-          DATABASE_PASSWORD: secretp@ssw0rd
-          SSH_PRIVATE_KEY: ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDX...
-        run: |
-          echo "API Token: $API_TOKEN"
-          echo "Database Password: $DATABASE_PASSWORD"
-          echo "SSH Private Key: $SSH_PRIVATE_KEY"
-
-  DisplaySecrets1:
-    runs-on: ubuntu-latest
-    env:
-      API_TOKEN: 94XHrfNRwXsjqTqApRrwWmhDLDHpIXYZ
-      DATABASE_PASSWORD: secretp@ssw0rd1234
-      SSH_PRIVATE_KEY: ssh-rsa AABCB3NzaC1yc2EAAAADAQABAAABgQDX...
-    steps:
-      - name: Test1
-        run: |
-          echo "API Token: $API_TOKEN"
-          echo "Database Password: $DATABASE_PASSWORD"
-          echo "SSH Private Key: $SSH_PRIVATE_KEY"
-
-  HelloWorld:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Hello, World!
-        run: echo "Hello, World9879!"
-
-  gitleaks-check:
+  install-gitleaks:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      # Step 1: Run GitLeaks and store the output in a file
+      - name: Install GitLeaks
+        run: |
+          curl -sSfL https://install.goreleaser.com/github.com/zricethezav/gitleaks.sh | bash
+
+  gitleaks-check:
+    needs: install-gitleaks
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
       - name: Run GitLeaks (First Run)
         id: gitleaks-first-run
         run: |
-          gitleaks --path=. --verbose > gitleaks_output_first_run.txt
+          ~/bin/gitleaks --path=. --verbose > gitleaks_output_first_run.txt
+
+  # Add your build and test steps here if needed
 
   gitleaks-check-again:
+    needs: install-gitleaks
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v2
 
-      # Step 2: Run GitLeaks again
       - name: Run GitLeaks (Second Run)
         id: gitleaks-second-run
         run: |
-          gitleaks --path=. --verbose > gitleaks_output_second_run.txt
+          ~/bin/gitleaks --path=. --verbose > gitleaks_output_second_run.txt
 
-      # Step 3: Concatenate the outputs of both runs
       - name: Concatenate Outputs
         run: cat gitleaks_output_first_run.txt gitleaks_output_second_run.txt > all_gitleaks_output.txt
 
-      # Step 4: Display all secrets
       - name: Display All Secrets
         run: cat all_gitleaks_output.txt
