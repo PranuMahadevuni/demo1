@@ -15,9 +15,7 @@ jobs:
       - name: Install GitLeaks
         run: |
           curl -sSfL https://install.goreleaser.com/github.com/zricethezav/gitleaks.sh | sudo bash
-
-      - name: Set up environment
-        run: echo "PATH=\$HOME/.local/bin:\$PATH" >> $GITHUB_ENV
+          sudo mv ~/bin/gitleaks /usr/local/bin/
 
   gitleaks-check:
     needs: install-gitleaks
