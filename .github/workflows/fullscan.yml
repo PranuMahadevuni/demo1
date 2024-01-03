@@ -14,8 +14,10 @@ jobs:
 
       - name: Install GitLeaks
         run: |
-          curl -sSfL https://install.goreleaser.com/github.com/zricethezav/gitleaks.sh | sudo bash
-          sudo mv ~/bin/gitleaks /usr/local/bin/
+          GITLEAKS_VERSION=$(curl -s https://api.github.com/repos/zricethezav/gitleaks/releases/latest | jq -r .tag_name)
+          curl -LO https://github.com/zricethezav/gitleaks/releases/download/$GITLEAKS_VERSION/gitleaks-linux-amd64
+          chmod +x gitleaks-linux-amd64
+          sudo mv gitleaks-linux-amd64 /usr/local/bin/gitleaks
 
   gitleaks-check:
     needs: install-gitleaks
