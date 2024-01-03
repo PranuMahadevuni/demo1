@@ -14,7 +14,7 @@ jobs:
 
       - name: Install GitLeaks
         run: |
-          curl -sSfL https://install.goreleaser.com/github.com/zricethezav/gitleaks.sh | bash
+          curl -sSfL https://install.goreleaser.com/github.com/zricethezav/gitleaks.sh | sudo bash
 
   gitleaks-check:
     needs: install-gitleaks
@@ -26,7 +26,7 @@ jobs:
       - name: Run GitLeaks (First Run)
         id: gitleaks-first-run
         run: |
-          ~/bin/gitleaks --path=. --verbose > gitleaks_output_first_run.txt
+          gitleaks --path=. --verbose > gitleaks_output_first_run.txt
 
   # Add your build and test steps here if needed
 
@@ -40,7 +40,7 @@ jobs:
       - name: Run GitLeaks (Second Run)
         id: gitleaks-second-run
         run: |
-          ~/bin/gitleaks --path=. --verbose > gitleaks_output_second_run.txt
+          gitleaks --path=. --verbose > gitleaks_output_second_run.txt
 
       - name: Concatenate Outputs
         run: cat gitleaks_output_first_run.txt gitleaks_output_second_run.txt > all_gitleaks_output.txt
