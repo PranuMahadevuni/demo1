@@ -1,0 +1,52 @@
+name: Hardcoded Secrets Detection
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  install-gitleaks:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install GitLeaks
+        run: |
+          GITLEAKS_VERSION=$(curl -s https://api.github.com/repos/zricethezav/gitleaks/releases/latest | jq -r .tag_name)
+          curl -LO https://github.com/zricethezav/gitleaks/releases/download/$GITLEAKS_VERSION/gitleaks-linux-amd64
+          chmod +x gitleaks-linux-amd64
+          sudo mv gitleaks-linux-amd64 /usr/local/bin/gitleaks
+
+  gitleaks-check:
+    needs: install-gitleaks
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Run GitLeaks (First Run)
+        id: gitleaks-first-run
+        run: |
+          gitleaks --path=. --verbose > gitleaks_output_first_run.txt
+
+  # Add your build and test steps here if needed
+
+  gitleaks-check-again:
+    needs: install-gitleaks
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Run GitLeaks (Second Run)
+        id: gitleaks-second-run
+        run: |
+          gitleaks --path=. --verbose > gitleaks_output_second_run.txt
+
+      - name: Concatenate Outputs
+        run: cat gitleaks_output_first_run.txt gitleaks_output_second_run.txt > all_gitleaks_output.txt
+
+      - name: Display All Secrets
+        run: cat all_gitleaks_output.txt
