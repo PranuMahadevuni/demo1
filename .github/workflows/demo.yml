@@ -19,7 +19,7 @@ my-job3:
     steps:
       - name: Display Secrets
         env:
-          API_TOKEN: "abc123xyz456"
+          API_TOKEN: "abc123xyz45678"
           DATABASE_PASSWORD: "secretp@ssw0rd"
           SSH_PRIVATE_KEY: "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDX..."
         run: |
