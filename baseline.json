@@ -1,1 +1,42 @@
-
+[
+ {
+  "Description": "Identified a pattern that may indicate AWS credentials, risking unauthorized cloud resource access and data breaches on AWS platforms.",
+  "StartLine": 7,
+  "EndLine": 7,
+  "StartColumn": 22,
+  "EndColumn": 41,
+  "Match": "AKIAQYLPMN5HHHFPZAM2",
+  "Secret": "AKIAQYLPMN5HHHFPZAM2",
+  "File": "Checkcode1.txt",
+  "SymlinkFile": "",
+  "Commit": "ab58538d7310151bb113f6f8657b7accf9818e60",
+  "Entropy": 3.6464393,
+  "Author": "PranuMahadevuni",
+  "Email": "153552807+PranuMahadevuni@users.noreply.github.com",
+  "Date": "2024-02-12T12:11:25Z",
+  "Message": "Delete check2.txt",
+  "Tags": [],
+  "RuleID": "aws-access-token",
+  "Fingerprint": "ab58538d7310151bb113f6f8657b7accf9818e60:Checkcode1.txt:aws-access-token:7"
+ },
+ {
+  "Description": "Detected a Generic API Key, potentially exposing access to various services and sensitive operations.",
+  "StartLine": 6,
+  "EndLine": 7,
+  "StartColumn": 6,
+  "EndColumn": 1,
+  "Match": "secret = 1qaqs23rft6fgvery5yy",
+  "Secret": "1qaqs23rft6fgvery5yy",
+  "File": "Checkcode1.txt",
+  "SymlinkFile": "",
+  "Commit": "ab58538d7310151bb113f6f8657b7accf9818e60",
+  "Entropy": 3.7841837,
+  "Author": "PranuMahadevuni",
+  "Email": "153552807+PranuMahadevuni@users.noreply.github.com",
+  "Date": "2024-02-12T12:11:25Z",
+  "Message": "Delete check2.txt",
+  "Tags": [],
+  "RuleID": "generic-api-key",
+  "Fingerprint": "ab58538d7310151bb113f6f8657b7accf9818e60:Checkcode1.txt:generic-api-key:6"
+ }
+]
