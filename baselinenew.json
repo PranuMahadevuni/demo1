@@ -18,5 +18,25 @@
   "Tags": [],
   "RuleID": "generic-api-key",
   "Fingerprint": "/code/Checkcode1.txt:generic-api-key:6"
+ },
+ {
+  "Description": "Detected a Generic API Key, potentially exposing access to various services and sensitive operations.",
+  "StartLine": 7,
+  "EndLine": 7,
+  "StartColumn": 6,
+  "EndColumn": 0,
+  "Match": "access_key_id = AKIAQYLPMN5HHHFPZAM2D3DA",
+  "Secret": "AKIAQYLPMN5HHHFPZAM2D3DA",
+  "File": "/code/Checkcode1.txt",
+  "SymlinkFile": "",
+  "Commit": "",
+  "Entropy": 3.8035088,
+  "Author": "",
+  "Email": "",
+  "Date": "",
+  "Message": "",
+  "Tags": [],
+  "RuleID": "generic-api-key",
+  "Fingerprint": "/code/Checkcode1.txt:generic-api-key:7"
  }
 ]
