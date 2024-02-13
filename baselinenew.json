@@ -1,0 +1,22 @@
+[
+ {
+  "Description": "Detected a Generic API Key, potentially exposing access to various services and sensitive operations.",
+  "StartLine": 6,
+  "EndLine": 7,
+  "StartColumn": 6,
+  "EndColumn": 1,
+  "Match": "secret = 1qaqs23rft6fgvery5yyo",
+  "Secret": "1qaqs23rft6fgvery5yyo",
+  "File": "/code/Checkcode1.txt",
+  "SymlinkFile": "",
+  "Commit": "",
+  "Entropy": 3.88018,
+  "Author": "",
+  "Email": "",
+  "Date": "",
+  "Message": "",
+  "Tags": [],
+  "RuleID": "generic-api-key",
+  "Fingerprint": "/code/Checkcode1.txt:generic-api-key:6"
+ }
+]
