@@ -1,5 +1,5 @@
 [
-{
+ {
   "Description": "Detected a Generic API Key, potentially exposing access to various services and sensitive operations.",
   "StartLine": 10,
   "EndLine": 10,
